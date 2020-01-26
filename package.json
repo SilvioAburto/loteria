@@ -1,0 +1,24 @@
+{
+  "name": "la_loteria",
+  "version": "0.1.0",
+  "private": true,
+  "homepage": "https://silvioaburto.github.io/loteria",
+  "scripts": {
+    "start": "nodemon server.js",
+    "test": "react-scripts test",
+    "build": "react-scripts build",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
+  },
+  "author": "Silvio Ortiz",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "react-app": "^1.1.2",
+    "react-scripts": "^3.3.0",
+    "require": "^2.4.20"
+  },
+  "devDependencies": {
+    "gh-pages": "^2.2.0"
+  }
+}
