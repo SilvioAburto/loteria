@@ -1,14 +1,19 @@
 <html>
   <head>
     <title>La Loteria</title> 
+    <link rel="icon" href="data:;base64,iVBORw0KGgo=">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="public/styling/style.css">
     <script src="https://code.createjs.com/1.0.0/createjs.min.js"></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
   </head>
   
   <body>
-      <div class="img_id" id = "img_id">
+      <div id = "history_div" class = "history_class" style="display: hidden;">
+        <div id = "used_cards">Work in progess...</div>
+        <button  id ="history_exit" class="history_exit_button">EXIT</button>
+      </div>
+      <div class="img_id" id = "deck_id">
         <div id = "card_index_div" class="card_index">0/54</div>
         <div id = "progress_bar" class="progress-bar" role="progressbar"></div>
         <div class = "cards_footer">

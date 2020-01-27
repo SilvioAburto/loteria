@@ -37,7 +37,9 @@ export function shuffle(array) {
     return array;
 }
 
-
+export function filterUsedCards(img_array, img_array_exclude){
+  return(img_array.filter(i => !img_array_exclude.includes(i.name)))
+}
 //deprecated
 /*
 function changeCard2(){
