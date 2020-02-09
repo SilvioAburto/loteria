@@ -85,14 +85,43 @@
     box-shadow: 0 1px #999;
   }
   
+  .history_left_button {
+    float:left;
+    position: relative;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    outline: none;
+    color: black;
+    font-weight: bolder;
+    width:33.33%;
+    height:100%;
+    background-color: white;
+    border: black solid 1px;
+    box-shadow: 0 1px #999;
+  }
+
+  .history_right_button {
+    position: relative;
+    cursor: pointer;
+    width:33.33%;
+    height:100%;
+    text-align: center;
+    text-decoration: none;
+    outline: none;
+    color: black;
+    font-weight: bolder;
+    background-color: white;
+    border: black solid 1px;
+    box-shadow: 0 1px #999;
+  }
+  
   .history_exit_button {
     float:right;
-    position: absolute;
+    position: relative;
     cursor: pointer;
-    bottom:0;
-    width:20%;
-    margin-left:80%;
-    height:5%;
+    width:33.33%;
+    height:100%;
     text-align: center;
     text-decoration: none;
     outline: none;
@@ -100,17 +129,28 @@
     font-weight: bolder;
     background-color:white;
     border: black solid 1px;
-    box-shadow: 0 1px #999; 
+    box-shadow: 0 1px #999;
   }
-  .start_button:hover, .history_button:hover, .reset_button:hover, .history_exit_button:hover {background-color: #3e8e41}
+  .start_button:hover, .history_button:hover, 
+  .reset_button:hover, .history_exit_button:hover,
+  .history_left_button:hover, .history_right_button:hover {background-color: #3e8e41}
   
-  .start_button:active, .history_button:active, .reset_button:active, .history_exit_button:active {
+  .start_button:active, .history_button:active, 
+  .reset_button:active, .history_exit_button:active,
+  .history_left_button:active,.history_right_button:active {
     background-color: #3e8e41;
     box-shadow: 0 5px #666;
     transform: translateY(4px);
   }
   
-  
+  .used_cards_div {
+    text-align: center;
+    margin-top:60%;
+    font-size:20px;
+    font-weight: bolder;
+  }
+
+
   .img_id {
     background-image: url(https://silvioaburto.github.io/la_loteria/img/loteria_cover.jpg);
     float: none;
