@@ -145,21 +145,27 @@
   
   .used_cards_div {
     text-align: center;
-    margin-top:60%;
-    font-size:20px;
+    margin-top:50%;
+    font-size:400% !important;
     font-weight: bolder;
+    font-family:'Sofia';
   }
 
-
+  .card_cover_class {
+    font-family: 'Sofia';
+    margin-top: 50%;
+    font-weight: bolder;
+    font-size: 500% !important;
+  }
+  
   .img_id {
-    background-image: url(https://silvioaburto.github.io/la_loteria/img/loteria_cover.jpg);
+    text-align: center;
     float: none;
     position: absolute;
     top:10%;
     margin-left:37.5%;
     margin-right:37.5% ;
-    color: #23304b;
-    background-color: black;
+    background-color:#e6e6ff;
     border: black solid 3.0px;
     width: 25%;
     height: 75%;
@@ -184,13 +190,12 @@
 
   @media only screen and (max-width: 800px) {
     .img_id {
-      background-image: url(https://silvioaburto.github.io/la_loteria/img/loteria_cover.jpg);
       float: none;
       top:0;
       position: absolute;
-      color: #23304b;
-      background-color: black;
+      background-color:#e6e6ff;
       border: black solid 3.0px;
+      text-align: center;
       margin-left:0;
       width: 100%;
       height: 100%;

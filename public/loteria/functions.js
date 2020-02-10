@@ -6,6 +6,7 @@ var timer = document.getElementById("timer");
 var card_index_div = document.getElementById("card_index_div")
 var history_element = document.getElementById(`history_div`)
 var used_cards_div = document.getElementById(`used_cards`)
+var deck_id = document.getElementById(`used_cards`)
 var elem = document.getElementById("progress_bar");
 var loaderId;
 var card_index = 0
@@ -15,7 +16,7 @@ var imagesUsed = [];
 var HistoryCardNegIndex = 0
 var images = returnCards()
 var images2 = utils.shuffle(images)
-var change_time = 1500 //in milliseconds 3500 is a good speed
+var change_time = 2500 //in milliseconds 3500 is a good speed
 var img_go_to;
 var img_id;
 
@@ -30,13 +31,13 @@ function UpdateButton(){
 }
 
 
-
 function changeCard(){
   images2 = utils.filterUsedCards(images2, imagesUsed);
   //console.log(imagesUsed)
   card_index = card_index + 1
-  card_index_div.textContent = card_index + "/" + images2.length
-  document.getElementById(`deck_id`).style.backgroundImage = "url('https://silvioaburto.github.io/la_loteria/img/" + images2[card_index].src +".jpg')"
+  card_index_div.textContent = card_index + "/" + images.length
+  console.log( "'public/images/" + images2[card_index].src +".jpg'")
+  document.getElementById(`deck_id`).style.backgroundImage = "url('/public/images/" + images2[card_index].src +".jpg')";
   utils.playSound(images2[card_index].name) 
   imagesUsed.push(images2[card_index].id)
 }
@@ -53,7 +54,10 @@ function PlayCards() {
       if (width>=110){
         width= 0
         elem.style.width ='0%';
-        changeCard()
+        if(imagesUsed ==0){
+          document.getElementById(`card_cover`).style.visibility = 'hidden';
+        }
+        changeCard();
       }
       loaderId = setTimeout(run, loader_time)
       
@@ -94,16 +98,11 @@ function historyImgChange(HistoryCardNegIndex){
   if(imagesUsed.length !=0){
     img_id = imagesUsed[imagesUsed.length - HistoryCardNegIndex-1]
     img_go_to  = images.filter(i => i.id == img_id)
-    //console.log(img_go_to[0].src)
     used_cards_div.textContent = img_go_to[0].name
-    //console.log(HistoryCardNegIndex)
   }
   else{
     used_cards_div.textContent = 'No Cards Played Yet'
   }
- // var go_to = imagesUsed[(imagesUsed.length-1) - HistoryCardNegIndex]
- // console.log(go_to)
-  //return(img_array.filter(i => !img_array_exclude.includes(i.id)))
   //document.getElementById(`deck_id`).style.backgroundImage = "url('https://silvioaburto.github.io/la_loteria/img/" + go_to +".jpg')"
 }
 
@@ -111,20 +110,19 @@ function historyImgChange(HistoryCardNegIndex){
 function ShowHistory(){
   pauseGame();
   HistoryCardNegIndex = 0; //reset history index
-  console.log(imagesUsed.length)
+  //console.log(imagesUsed.length)
   document.getElementById(`deck_id`).style.visibility = 'hidden'
-  history_left.style[`pointer-events`] = 'none'
-  history_right.style[`pointer-events`] = 'none'
-  document.getElementById(`history_left`).style.backgroundColor = 'lightgoldenrodyellow'
-  document.getElementById(`history_right`).style.backgroundColor = 'lightgoldenrodyellow'
+  //If the game has lesss than 2 cards do not allow left or right navigation
   history_element.style.visibility = 'visible'
-  if(imagesUsed.Length == 0){
-    //console.log("No image to show")
-    used_cards_div.textContent = 'No Cards Played Yet'
-  }
-  if(imagesUsed.Length === 1){
+  history_right.style[`pointer-events`] = 'none'
+  history_right.style.backgroundColor = 'lightgray'
+  if(imagesUsed.length < 2) {
     history_left.style[`pointer-events`] = 'none'
-    document.getElementById(`history_left`).style.backgroundColor = 'lightgoldenrodyellow'
+    history_left.style.backgroundColor = 'lightgray'
+  }
+  else{
+    history_left.style[`pointer-events`] = 'auto'
+    history_left.style.backgroundColor = 'white'
   }
   historyImgChange(HistoryCardNegIndex)
  // history_element.textContent = card_index + "/" + images.length
@@ -143,12 +141,12 @@ function HistoryBack(){
   if(HistoryCardNegIndex <= 0){
     // console.log('turn off right')
      history_right.style[`pointer-events`] = 'none'
-     document.getElementById(`history_right`).style.backgroundColor = 'lightgoldenrodyellow'
+     document.getElementById(`history_right`).style.backgroundColor = 'lightgray'
    }
   if(HistoryCardNegIndex >= imagesUsed.length-1){
     //console.log('turn off left')
     history_left.style[`pointer-events`] = 'none'
-    document.getElementById(`history_left`).style.backgroundColor = 'lightgoldenrodyellow'
+    document.getElementById(`history_left`).style.backgroundColor = 'lightgray'
   }
   //console.log(imagesUsed)
   //console.log(HistoryCardNegIndex)
@@ -161,7 +159,7 @@ function HistoryNext(){
   if(HistoryCardNegIndex <= 0){
    // console.log('turn off right')
     history_right.style[`pointer-events`] = 'none'
-    document.getElementById(`history_right`).style.backgroundColor = 'lightgoldenrodyellow'
+    document.getElementById(`history_right`).style.backgroundColor = 'lightgray'
   }
   if(HistoryCardNegIndex < imagesUsed.length){
     //console.log('turn on left')
@@ -196,7 +194,8 @@ function resetGame() {
   width=0; //loading bar width
   elem.style.width =width + '%'; //reset loading bar
   card_index_div.textContent = card_index + "/" + images.length; //reset card index text
-  document.getElementById(`deck_id`).style.backgroundImage = "url('https://silvioaburto.github.io/la_loteria/img/loteria_cover.jpg')"; //display cover image
+  document.getElementById(`card_cover`).style.visibility = 'visible';
+  document.getElementById(`deck_id`).style.backgroundImage = 'none';
   if(isPlaying){
     UpdateButton();
   }
