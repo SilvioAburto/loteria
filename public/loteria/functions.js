@@ -37,7 +37,7 @@ function changeCard(){
   card_index = card_index + 1
   card_index_div.textContent = card_index + "/" + images.length
   console.log( "'public/images/" + images2[card_index].src +".jpg'")
-  document.getElementById(`deck_id`).style.backgroundImage = "url('/public/images/" + images2[card_index].src +".jpg')";
+  document.getElementById(`deck_id`).style.backgroundImage = "url('http://silvioaburto.github.io/loteria/public/images/" + images2[card_index].src +".jpg')";
   utils.playSound(images2[card_index].name) 
   imagesUsed.push(images2[card_index].id)
 }
