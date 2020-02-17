@@ -65,7 +65,7 @@ Deck.prototype.toggleTutorialButtons = function() {
   let board = this;
   function nextPreviousClick() {
     if (counter === 1) {
-      document.getElementById("tutorial").innerHTML = `<h3>Welcome to La Loteria!</h3>
+      document.getElementById("tutorial").innerHTML = `<h3><b>Welcome to La Loteria!</b></h3>
       <p>Already know how to play? No problem, press the "Skip" button below.</p>
       <p>Otherwise use the next and previous buttons to navigate instructions. </p>
       <div id="tutorialCounter">${counter}/5</div><button id="nextButton" class="btn btn-default navbar-btn" type="button">Next</button><button id="previousButton" class="btn btn-default navbar-btn" type="button">Previous</button><button id="skipButton" class="btn btn-default navbar-btn" type="button">Skip</button>`
@@ -77,7 +77,7 @@ Deck.prototype.toggleTutorialButtons = function() {
     } else if (counter === 3) {
       document.getElementById("tutorial").innerHTML = `<div class="tutorial_body">
       <p>Cards are shuffled, then one by one picked and read out loud to the players</p>
-      <p>If the image chosen matches one of the images on your loteria board, mark it. This is traditionally done using a bean</div>
+      <p>If the image chosen matches one of the images on your loteria board, mark it. This is traditionally done using a bean.</div>
       <div id="tutorialCounter">${counter}/5</div><button id="nextButton" class="btn btn-default navbar-btn" type="button">Next</button><button id="previousButton" class="btn btn-default navbar-btn" type="button">Previous</button><button id="skipButton" class="btn btn-default navbar-btn" type="button">Skip</button>`
     } else if (counter === 4) {
       document.getElementById("tutorial").innerHTML = `<div class="tutorial_body">
