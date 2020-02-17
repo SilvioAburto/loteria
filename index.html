@@ -4,14 +4,26 @@
     <link rel="icon" href="data:;base64,iVBORw0KGgo=">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="public/styling/style.css">
+    <link id="cssTheme" rel="stylesheet" href="public/styling/cssBasic.css"/>
     <script src="https://code.createjs.com/1.0.0/createjs.min.js"></script>
     <link href='https://fonts.googleapis.com/css?family=Sofia' rel='stylesheet'>
+    <div id="fb-root"></div>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
   </head>
   
   <body>
       <div id = "history_div" class = "history_class" style="display: hidden;">
         <div id = "used_cards" class= "used_cards_div"></div>
+        <div id="tutorial">
+        </br>
+          <h3><b>Welcome to La Loteria!</b></h3>
+          <p>Already know how to play? No problem, press the "Skip" button below.</p>
+          <p>Otherwise use the next and previous buttons to navigate instructions. </p>
+          <div id="tutorialCounter">1/5</div>
+          <button id="nextButton" class="btn btn-default navbar-btn" type="button">Next</button>
+          <button id="previousButton" class="btn btn-default navbar-btn" type="button">Previous</button>
+          <button id="skipButton" class="btn btn-default navbar-btn" type="button">Skip</button>
+        </div>
         <div class="cards_footer">
           <button  id ="history_left" class="history_left_button">PREVIOUS</button>
           <button  id ="history_right" class="history_right_button">NEXT</button>

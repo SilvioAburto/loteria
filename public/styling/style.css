@@ -69,6 +69,13 @@
     box-shadow: 0 1px #999;
   }
   
+  .tutorial_body {
+    font-weight:bolder;
+    text-align:center;
+    margin-top:20%;
+    padding:16px;
+
+  }
   .reset_button {
     float:right;
     position: relative;
@@ -145,6 +152,7 @@
   
   .used_cards_div {
     text-align: center;
+    padding: 10px;
     margin-top:50%;
     font-size:400% !important;
     font-weight: bolder;
@@ -155,7 +163,7 @@
     font-family: 'Sofia';
     margin-top: 50%;
     font-weight: bolder;
-    font-size: 500% !important;
+    font-size: 400% !important;
   }
   
   .img_id {
@@ -250,3 +258,5 @@
     }
 
   }
+
+  
