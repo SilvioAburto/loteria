@@ -3,47 +3,64 @@
     <title>La Loteria</title> 
     <link rel="icon" href="data:;base64,iVBORw0KGgo=">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="public/styling/style.css">
     <script src="https://code.createjs.com/1.0.0/createjs.min.js"></script>
     <link href='https://fonts.googleapis.com/css?family=Sofia' rel='stylesheet'>
     <div id="fb-root"></div>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src='public/loteria/functions.js' type="module"></script>
+    <script src='public/loteria/returnCards.js' type="module"></script>
   </head>
   
+  <script>
+  </script>
   <body>
-      <div id = "history_div" class = "history_class" style="display: hidden;">
-        <div id = "used_cards" class= "used_cards_div"></div>
-        <div id="tutorial">
-        </br>
-          <h3><b>Welcome to La Loteria!</b></h3>
-          <p>Already know how to play? No problem, press the "Skip" button below.</p>
-          <p>Otherwise use the next and previous buttons to navigate instructions. </p>
-          <div id="tutorialCounter">1/5</div>
-          <button id="nextButton" class="btn btn-default navbar-btn" type="button">Next</button>
-          <button id="previousButton" class="btn btn-default navbar-btn" type="button">Previous</button>
-          <button id="skipButton" class="btn btn-default navbar-btn" type="button">Skip</button>
-        </div>
-        <div class="cards_footer">
-          <button  id ="history_left" class="history_left_button">PREVIOUS</button>
-          <button  id ="history_right" class="history_right_button">NEXT</button>
-          <button  id ="history_exit" class="history_exit_button">EXIT</button>
-        </div>
+      <div id = "config_div" class = "config_class" style="display:hidden;">
+        <i id ="exit_icon_config" class="fa fa-times" aria-hidden="true"></i>
+        <h2>Speed (t=seconds) </h2>
+        <form id ="radio_form" name= "radioForm">
+          <div><input id = "speed_button1" type="radio" name="speed" value="1" style="height:25px; width:25px; vertical-align: middle;"/> 1</div>
+          <div><input id = "speed_button2" type="radio" name="speed" value="2" style="height:25px; width:25px; vertical-align: middle;"/> 2</div>
+          <div><input id = "speed_button3" checked type="radio" name="speed" value="3" style="height:25px; width:25px; vertical-align: middle;" /> 3</div>
+          <div><input id = "speed_button4" type="radio" name="speed" value="4" style="height:25px; width:25px; vertical-align: middle;"/> 4</div>
+        </form>
+        <hr style ="border: 1px solid lightblue">
+        <button id="new_game">New Game</button>
       </div>
+
+      <div id = "history_div" class = "history_class" style="display:hidden;">
+        <div id = "used_cards" class= "used_cards_div"></div>
+        <i id ="exit_icon_history" class="fa fa-times" aria-hidden="true"></i>
+        <i id = "left_arrow_icon" class="fa fa-caret-left" aria-hidden="true"></i>
+        <i id = "right_arrow_icon" class="fa fa-caret-right" aria-hidden="true"></i>
+      </div>
+      <div id="tutorial">
+      </br>
+        <h3><b>Welcome to La Loteria!</b></h3>
+        <p>Already know how to play? No problem, press the "Skip" button below.</p>
+        <p>Otherwise use the next and previous buttons to navigate instructions. </p>
+        <div id="tutorialCounter">1/5</div>
+        <button id="nextButton" class="btn btn-default navbar-btn" type="button">Next</button>
+        <button id="previousButton" class="btn btn-default navbar-btn" type="button">Previous</button>
+        <button id="skipButton" class="btn btn-default navbar-btn" type="button">Skip</button>
+      </div>
+
       <div class="img_id" id = "deck_id">
         <div id = "card_index_div" class="card_index">0/54</div>
+        <i id = "config_icon" class="fa fa-gear"></i>
+        <i id = "history_icon" class="fa fa-bars"></i>
+        <i id = "play_icon" class="fa fa-play" style="visibility: hidden;"></i>
+        <i id = "pause_icon" class="fa fa-pause" style="visibility: hidden;"></i>
         <div id = "card_cover" class = "card_cover_class">
           La Loteria
         </div>
-        <div id = "progress_bar" class="progress-bar" role="progressbar"></div>
         <div class = "cards_footer">
-          <button  id ="start_button" class="start_button">START</button>
-          <button  id="history_button" class="history_button">HISTORY</button>
-          <button  id ="reset_button" class="reset_button">RESET</button>
+          <progress max="100" value="1"></progress>
         </div>
       </div>
+
   </body>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <script src='public/loteria/functions.js' type="module"></script>
-  <script src='public/loteria/returnCards.js' type="module"></script>
 </html>
