@@ -13,6 +13,16 @@
     text-align: center;
   }
 
+  .clock_class {
+    position: absolute;
+    top:0;
+    left:2%;
+    margin-top:0;
+    font-size: 150%;
+    font-weight: bolder;
+    color: black;
+    text-align: left;  
+  }
   progress{
     position: absolute;
     left:0;
@@ -29,6 +39,14 @@
     position: absolute;
     right:1%;
   }
+  .fa-cloud-download{
+    color:rgba(32, 147, 255, 0.87);
+    font-size:40px;
+    position: absolute;
+    right:1%;
+    top:100px;
+  }
+
   .fa-bars {
     color:rgba(32, 147, 255, 0.87);
     font-size:48px;
@@ -41,18 +59,26 @@
     position: absolute;
     color:lightgray;
     font-size:110px;
-    width: 10%;
-    height: 10%;
     text-align: center;
-    margin-top: 60%;
-    margin-left:40%;
+    width: 100%;
     bottom: 0;
-    top: 0;
+    height: 100%;
     left: 0;
-    right: 0;
     z-index: 1;
+    padding: 60% 0;
   }
-
+  .fa-pause {
+    position: absolute;
+    color:lightgray;
+    font-size:110px;
+    text-align: center;
+    width: 100%;
+    bottom: 0;
+    height: 100%;
+    left: 0;
+    z-index: 1;
+    padding: 60% 0;
+  }
   .fa-times {
     position: absolute;
     color:black;
@@ -73,7 +99,6 @@
     font-size: 120px;
   }
 
-
   .fa-caret-right {
     position: absolute;
     color:black;
@@ -81,20 +106,7 @@
     right:0;
     font-size: 120px;
   }
-  .fa-pause {
-    position: absolute;
-    color:lightgray;
-    font-size:110px;
-    width: 10%;
-    height: 10%;
-    text-align: center;
-    margin-top: 60%;
-    margin-left:36%;
-    bottom: 0;
-    top: 0;
-    left: 0;
-    right: 0;
-  }
+
   .App-link {
     color: #61dafb;
   }
@@ -235,12 +247,11 @@
     transform: translateY(8px);
   }
   .used_cards_div {
-    text-align: center;
     padding: 10px;
-    margin-top:50%;
-    font-size:400% !important;
+    width:60%;
     font-weight: bolder;
     font-family:'Sofia';
+    text-align: center;
   }
 
   .card_cover_class {
@@ -291,7 +302,8 @@
     border: black solid 3.0px;
     width: 25%;
     height: 75%;
-    background-size: 100% 100%;
+    background-size: 65% 60% !important;
+    background-position: center !important;
     background-repeat: no-repeat;
   }
 
@@ -300,12 +312,24 @@
   }
 
   #new_game {
-    width:100%;
+    width:80%;
+    margin-left: 10%;
     height:10%;
     font-size:2em;
     position: absolute;
+    font-weight: bolder;
     bottom:2%;
     left:0;
+    background-color: lightskyblue;
+  }
+
+  #new_game:active {
+    transform: translateY(8px);
+  }
+
+  #config_save_exit {
+    width:40%;
+    font-size:1.5em;
   }
 
   .config_class {
@@ -521,3 +545,4 @@ p {
   line-height: 1.72222;
   margin: 0 0 15px;
 }
+

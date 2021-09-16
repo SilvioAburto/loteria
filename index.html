@@ -2,13 +2,13 @@
   <head>
     <title>La Loteria</title> 
     <link rel="icon" href="data:;base64,iVBORw0KGgo=">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="public/styling/style.css">
     <script src="https://code.createjs.com/1.0.0/createjs.min.js"></script>
     <link href='https://fonts.googleapis.com/css?family=Sofia' rel='stylesheet'>
     <div id="fb-root"></div>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src='public/loteria/functions.js' type="module"></script>
@@ -23,11 +23,12 @@
         <h2>Speed (t=seconds) </h2>
         <form id ="radio_form" name= "radioForm">
           <div><input id = "speed_button1" type="radio" name="speed" value="1" style="height:25px; width:25px; vertical-align: middle;"/> 1</div>
-          <div><input id = "speed_button2" type="radio" name="speed" value="2" style="height:25px; width:25px; vertical-align: middle;"/> 2</div>
-          <div><input id = "speed_button3" checked type="radio" name="speed" value="3" style="height:25px; width:25px; vertical-align: middle;" /> 3</div>
+          <div><input id = "speed_button2" checked type="radio" name="speed" value="2" style="height:25px; width:25px; vertical-align: middle;"/> 2</div>
+          <div><input id = "speed_button3" type="radio" name="speed" value="3" style="height:25px; width:25px; vertical-align: middle;" /> 3</div>
           <div><input id = "speed_button4" type="radio" name="speed" value="4" style="height:25px; width:25px; vertical-align: middle;"/> 4</div>
         </form>
         <hr style ="border: 1px solid lightblue">
+        <button id="config_save_exit">Save & Exit</button>
         <button id="new_game">New Game</button>
       </div>
 
@@ -50,6 +51,9 @@
 
       <div class="img_id" id = "deck_id">
         <div id = "card_index_div" class="card_index">0/54</div>
+        <div id = "clock" class="clock_class">00:00</div>
+        <!--<div id = "countdown" class="timer">0:00</div>-->
+        <!--<i id ="download_boards" class="fa fa-cloud-download" aria-hidden="true"></i>-->
         <i id = "config_icon" class="fa fa-gear"></i>
         <i id = "history_icon" class="fa fa-bars"></i>
         <i id = "play_icon" class="fa fa-play" style="visibility: hidden;"></i>

@@ -2,18 +2,20 @@
 import { returnCards } from './returnCards.js'
 import * as utils from './utils.js'
 
-var timer = document.getElementById("timer");
-var card_index_div = document.getElementById("card_index_div");
+//var timer = document.getElementById(`timer`);
+var card_index_div = document.getElementById(`card_index_div`);
+var card_timer_div = document.getElementById(`card_timer_div`)
 var history_element = document.getElementById(`history_div`);
 var used_cards_div = document.getElementById(`used_cards`);
 var deck_id_div = document.getElementById(`deck_id`);
-var pause_icon =   document.getElementById(`pause_icon`);
-var new_game = document.getElementById(`new_game`)
-var exit_icon_history =   document.getElementById(`exit_icon_history`)
-var exit_icon_config =   document.getElementById(`exit_icon_config`)
-var left_icon = document.getElementById(`left_arrow_icon`)
-var right_icon = document.getElementById(`right_arrow_icon`)
-var config_div = document.getElementById(`config_div`)
+var pause_icon = document.getElementById(`pause_icon`);
+var new_game = document.getElementById(`new_game`);
+var exit_icon_history = document.getElementById(`exit_icon_history`);
+var exit_icon_config = document.getElementById(`exit_icon_config`);
+var left_icon = document.getElementById(`left_arrow_icon`);
+var right_icon = document.getElementById(`right_arrow_icon`);
+var config_div = document.getElementById(`config_div`);
+var card_cover = document.getElementById(`card_cover`);
 var images = returnCards();
 var images2 = images;
 var loaderId;
@@ -29,6 +31,11 @@ var counter = 1;
 var tutorial_up = true;
 var config_up = false;
 var history_up = false;
+var clock = document.getElementById('clock');
+var timer = null;  // The timer variable is null until the clock initializes
+var seconds = 0;
+var minutes = 0;
+var hours = 0;
 
 
 function Deck() {
@@ -90,10 +97,12 @@ Deck.prototype.toggleTutorialButtons = function() {
       document.getElementById("tutorial").innerHTML = `
       <div class="tutorial_body"><h3><b>Enjoy!</b></h3><p>I had a lot of fun writing this website, I hope you enjoy it as well.</p>
       <p>See the source code <a href="https://github.com/SilvioAburto/loteria">here</a>.
-      <p>Check out my Blog <a href="https://silvioaburto.github.io">here</a>! </p> </div><div id="tutorialCounter">${counter}/5</div><button id="finishButton" class="btn btn-default navbar-btn" type="button">Finish</button><button id="previousButton" class="btn btn-default navbar-btn" type="button">Previous</button><button id="skipButton" class="btn btn-default navbar-btn" type="button">Skip</button>`
+      <p>Check out my Blog <a href="https://silvioaburto.github.io">here</a>! </p> 
+      <p>Instagram account <a href="https://www.instagram.com/silviortizz/">here</a>! </p> 
+      </div>
+      <div id="tutorialCounter">${counter}/5</div><button id="finishButton" class="btn btn-default navbar-btn" type="button">Finish</button><button id="previousButton" class="btn btn-default navbar-btn" type="button">Previous</button><button id="skipButton" class="btn btn-default navbar-btn" type="button">Skip</button>`
       document.getElementById("finishButton").onclick = () => {
         document.getElementById("tutorial").style.display = "none";
-        //board.toggleButtons();
       }
       tutorial_up = false;
     }
@@ -102,25 +111,60 @@ Deck.prototype.toggleTutorialButtons = function() {
 };
 
 
+function handleClock(){
+  console.log("running clock handler");
+  console.log(timer);
+  if(timer !== null){
+    clearInterval(timer);  // Cancel the timer
+    timer = null;  // Reset the timer because the clock is now not ticking.
+  } else {
+    timer = setInterval(updateClock, 1000);
+  }
+}
+
+function formatClock(n){
+  return n > 9 ? "" + n: "0" + n;
+}
+
+function updateClock() {
+    console.log("running clock update");
+    seconds += 1;
+    if(seconds > 60){
+      seconds = 0;
+      minutes +=1;
+    }
+    if(minutes > 60){
+      minutes = 0;
+      hours +=1;
+    }
+    if(hours > 1){
+      clock.innerText = formatClock(hours) + ':'+formatClock(minutes)+':'+ formatClock(seconds);
+    }
+    else{
+      clock.innerText = formatClock(minutes)+':'+ formatClock(seconds);
+    } 
+}
+
+
 function changeCard(){
   images2 = utils.filterUsedCards(images2, imagesUsed); //Remove used images
   if(card_index === 0){
-    document.getElementById(`card_cover`).style.visibility = 'hidden';
+    card_cover.style.visibility = 'hidden';
     images2 = utils.shuffle(images2)
   }
   card_index_div.textContent = (card_index+1) + "/" + images.length;
-  document.getElementById(`deck_id`).style.backgroundImage = "url('http://silvioaburto.github.io/loteria/public/images/" + images2[0].src +".jpg')";
+  var imgPath = "http://silvioaburto.github.io/loteria/public/images/" + images2[0].src +".jpg"
+  console.log(imgPath);
+  document.getElementById('deck_id').setAttribute("style", "background-image:url("+imgPath+");!important");
+  //document.getElementById(`deck_id`).style.backgroundImage = "url('http://silvioaburto.github.io/loteria/public/images/" + images2[0].src +".jpg')";
   utils.playSound(images2[0].name); 
   imagesUsed.push(images2[0].id);
   card_index = card_index + 1;
 }
 
-
-
 function showHidePauseIcon() {
   pause_icon.style.visibility = "visible";
   setTimeout(() => pause_icon.style.visibility = "hidden", 100)
-
 }
 
 //Try a nested setinterval for more precise timing. 
@@ -144,7 +188,7 @@ function PlayCards() {
           if (width > 100){
             width = 0
             if(imagesUsed===0){
-              document.getElementById(`card_cover`).style.visibility = 'hidden';
+              card_cover.style.visibility = 'hidden';
             }
             changeCard();
             progress.val(progress.attr('min'))
@@ -160,7 +204,7 @@ function PlayCards() {
 };
 
 function ExitHistory(){
-  //pauseGame();
+  pauseGame();
   history_up = false;
   document.getElementById(`history_div`).style.visibility = 'hidden';
   document.getElementById(`deck_id`).style.visibility = 'visible';
@@ -168,46 +212,89 @@ function ExitHistory(){
 }
 
 
-function startTimer(m, s) { 
-    timer.textContent = m + ":" + s;
-    if (s == 0) {
-        if (m == 0) {
-            return;
-        } else if (m != 0) {
-            m = m - 1;
-            s = 60;
-        }
-    }
-    
-    s = s - 1;
-    id = setTimeout(function () {
-        startTimer(m, s)
-    }, 1000);
-}
+//startTime
+var timePassed = 0;
 
+//Run Timer
+var runTimer = function() {
+    card_timer_div.textContent = ++justSomeNumber
+    console.log(++justSomeNumber);
+};
+
+function updateTimer(){
+  var timePassed;
+  var timeParsed;
+  timePassed = ++justSomeNumber;
+  if(timePassed < 100){
+    timeParsed = '00:00:'+ timePassed
+  }
+  else if(timePassed > 100)
+    card_timer_div.textContent =  ++justSomeNumber
+}
 
 function historyImgChange(HistoryCardNegIndex){
   if(imagesUsed.length !=0){
     img_id = imagesUsed[imagesUsed.length - HistoryCardNegIndex-1]
     img_go_to  = images.filter(i => i.id == img_id)
-    used_cards_div.textContent = img_go_to[0].name
+    var img_url = "url('https://silvioaburto.github.io/la_loteria/img/" + img_go_to[0].src +".jpg')"
+    console.log(img_url)
+    history_element.style.backgroundImage = img_url
   }
   else{
     used_cards_div.textContent = 'No Cards Played Yet'
   }
-  //document.getElementById(`deck_id`).style.backgroundImage = "url('https://silvioaburto.github.io/la_loteria/img/" + go_to +".jpg')"
+}
+
+function changeSpeed(speed){
+  change_time = speed*1000;
+}
+
+function getSpeed(){
+  console.log("hello")
+  var radioElements = document.getElementsByName("speed")
+  var checkedFlag = true;
+  var counter = 0;
+  while(checkedFlag){
+    if(radioElements[counter].checked){
+      checkedFlag = false;
+      return radioElements[counter].value;
+    }
+    else{
+      counter++;
+    }
+  }
 }
 
 
-
-
-function CloseConfig(){
-  config_div.style.visibility = 'hidden';
-  document.getElementById(`deck_id`).style.visibility = 'visible';
-  right_icon.style.visibility = 'visible';
-  left_icon.style.visibility = 'visible';
-  config_up = false;
-  PlayCards();
+function CloseConfig(save){
+  if(save){
+    if(card_index === 0){
+      card_cover.style.visibility = 'visible';
+    }
+    config_div.style.visibility = 'hidden';
+    document.getElementById(`deck_id`).style.visibility = 'visible';
+    right_icon.style.visibility = 'visible';
+    left_icon.style.visibility = 'visible';
+    config_up = false;
+    var newSpeed = getSpeed()
+    changeSpeed(newSpeed);
+    PlayCards();
+    handleClock();
+  }
+  else{
+    if(card_index === 0){
+      card_cover.style.visibility = 'visible';
+    }
+    var radioElements = document.getElementsByName("speed")
+    radioElements[(change_time/1000)-1].checked= true
+    config_div.style.visibility = 'hidden';
+    document.getElementById(`deck_id`).style.visibility = 'visible';
+    right_icon.style.visibility = 'visible';
+    left_icon.style.visibility = 'visible';
+    config_up = false;
+    handleClock();
+    PlayCards();
+  }
 }
 
 
@@ -217,6 +304,7 @@ function OpenConfig(){
   document.getElementById(`play_icon`).style.visibility = "hidden";
   document.getElementById(`deck_id`).style.visibility = 'hidden';
   history_element.style.visibility = 'hidden'
+  card_cover.style.visibility = 'hidden';
   right_icon.style.visibility = "hidden";
   left_icon.style.visibility = 'hidden';
   config_div.style.visibility = 'visible'
@@ -284,11 +372,13 @@ function HistoryNext(){
 
 function pauseGame() {
   clearTimeout(loaderId);
+  clearInterval(timer);
 }
 
 function resetGame() {
   if(confirm("Are you sure?")){
     var progress = $('progress')
+    clearInterval(timer);
     clearTimeout(loaderId);
     imagesUsed = []; //reset imagesUsed to none
     images = utils.shuffle(images) //reshuffle images
@@ -298,10 +388,10 @@ function resetGame() {
     card_index_div.textContent = card_index + "/" + images.length; //reset card index text
     config_div.style.visibility = 'hidden';
     document.getElementById(`deck_id`).style.visibility = 'visible';
-    document.getElementById(`card_cover`).style.visibility = 'visible';
+    card_cover.style.visibility = 'visible';
     right_icon.style.visibility = 'visible';
     left_icon.style.visibility = 'visible';
-
+    document.getElementById(`deck_id`).style.backgroundImage = "none";
     config_up = false;
     if(isPlaying){
       UpdateStatus();
@@ -314,9 +404,10 @@ function resetGame() {
 function handleCardEvent(){
   var event_type = event.target.id
   if(tutorial_up === false){
-    if(event_type === 'deck_id' | event_type === 'play_icon'){
+    if(event_type === 'deck_id' | event_type === 'play_icon' | event_type === 'card_cover'){
       document.getElementById("tutorial").style.display = "none";
       utils.LoadSounds(images);
+      handleClock();
       UpdateStatus();
       PlayCards();
     }
@@ -339,34 +430,27 @@ function handleKeyEvent(event){
       utils.LoadSounds(images);
       UpdateStatus();
       PlayCards();
+      handleClock();
     }
   }
   else{return;}
 }
 
+
 var radioButtons = document.radioForm.speed;
 var prev = null;
-
-function changeSpeed(){
-  if(this !== prev){
-    prev = this
-  }
-  change_time = prev.value*1000;
-  console.log(prev.value)
-
-}
-
 for(var i=0; i < radioButtons.length; i++){
-  radioButtons[i].addEventListener("change",changeSpeed, false)
+ // radioButtons[i].addEventListener("change",changeSpeed, false)
 }
 
+
+var config_save_exit = document.getElementById(`config_save_exit`)
 
 window.addEventListener("keydown", (event) => {handleKeyEvent(event)}, false);
 new_game.addEventListener("click", resetGame, false);
 deck_id_div.addEventListener("click", handleCardEvent, false);
-exit_icon_config.addEventListener("click", CloseConfig, false);
-//reset_button.addEventListener("click", resetGame, false)
-//history_button.addEventListener("click", ShowHistory, false)
+exit_icon_config.addEventListener("click", () => CloseConfig(false), false);
+config_save_exit.addEventListener("click", () => CloseConfig(true), false)
 left_icon.addEventListener("click", HistoryBack, false)
 right_icon.addEventListener("click", HistoryNext, false)
 exit_icon_history.addEventListener("click", ExitHistory, false)

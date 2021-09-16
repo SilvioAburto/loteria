@@ -40,22 +40,23 @@ export function shuffle(array) {
 export function filterUsedCards(img_array, img_array_exclude){
   return(img_array.filter(i => !img_array_exclude.includes(i.id)))
 }
-//deprecated
-/*
-function changeCard2(){
-    //Shuffle cards
-    images = utils.shuffle(images)
-    countdown = setTimeout(function flip() {
-  
-      //console.log("card index is " + card_index)
-      card_index = card_index + 1
-      card_index_div.textContent = card_index + "/" + images.length
-      document.getElementById(`img_id`).style.backgroundImage = "url('https://silvioaburto.github.io/la_loteria/img/" + images[card_index].src +".jpg')"
-      playSound(images[card_index].name) 
-  
-      countdown = setTimeout(flip, change_time)
-    }, change_time);
-      
+
+export function loteriaTimer(t){
+    var t0 =(new Date ()).valueOf();
+    var diff = t -t0
+    console.log(diff)
+    if(timeStart){
+      var t = (new Date ()).valueOf();
     }
-    */
-   
+}
+/*
+ * Self-adjusting interval to account for drifting
+ * 
+ * @param {function} workFunc  Callback containing the work to be done
+ *                             for each interval
+ * @param {int}      interval  Interval speed (in milliseconds) - This 
+ * @param {function} errorFunc (Optional) Callback to run if the drift
+ *                             exceeds interval
+*/
+/*Source https://stackoverflow.com/questions/29971898/how-to-create-an-accurate-timer-in-javascript */ 
+
