@@ -16,10 +16,18 @@
     "browser-refresh": "^1.7.3",
     "express": "^4.17.1",
     "react-app": "^1.1.2",
-    "react-scripts": "^3.3.0",
-    "require": "^2.4.20"
+    "react-scripts": "^4.0.3",
+    "require": "^0.4.4"
   },
   "devDependencies": {
     "gh-pages": "^2.2.0"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SilvioAburto/loteria.git"
+  },
+  "bugs": {
+    "url": "https://github.com/SilvioAburto/loteria/issues"
+  },
+  "description": ""
 }
