@@ -153,7 +153,7 @@ function changeCard(){
     images2 = utils.shuffle(images2)
   }
   card_index_div.textContent = (card_index+1) + "/" + images.length;
-  var imgPath = "http://silvioaburto.github.io/loteria/public/images/" + images2[0].src +".jpg"
+  var imgPath = "https://silvioaburto.github.io/loteria/public/images/" + images2[0].src +".jpg"
   console.log(imgPath);
   document.getElementById('deck_id').setAttribute("style", "background-image:url("+imgPath+") !important");
   //document.getElementById(`deck_id`).style.backgroundImage = "url('http://silvioaburto.github.io/loteria/public/images/" + images2[0].src +".jpg')";
