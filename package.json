@@ -14,7 +14,7 @@
   "license": "ISC",
   "dependencies": {
     "browser-refresh": "^1.7.3",
-    "express": "^4.17.1",
+    "express": "^4.18.2",
     "react-app": "^1.1.2",
     "react-scripts": "^4.0.3",
     "require": "^0.4.4"
